@@ -1,5 +1,5 @@
 RELEASE_VERSION ?= $(shell cat ../../../release.version)
-PROJECT_NAME=kafka
+PROJECT_NAME ?=kafka
 
 include ../../../Makefile.docker
 

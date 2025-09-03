@@ -17,11 +17,22 @@ LABEL name='base' \
 USER root
 
 RUN microdnf update -y \
-    && microdnf --setopt=install_weak_deps=0 --setopt=tsflags=nodocs install -y java-${JAVA_VERSION}-openjdk-headless openssl shadow-utils \
+    && microdnf --setopt=install_weak_deps=0 --setopt=tsflags=nodocs install -y java-${JAVA_VERSION}-openjdk-headless openssl shadow-utils wget make tar gzip autoconf automake libtool gcc\
     && microdnf reinstall -y tzdata \
     && microdnf clean all -y
 
 ENV JAVA_HOME=/usr/lib/jvm/jre-17
+
+RUN wget https://github.com/jemalloc/jemalloc/archive/refs/tags/5.3.0.tar.gz \
+    && tar zxvf 5.3.0.tar.gz \
+    && cd jemalloc-5.3.0/ \
+    && ./autogen.sh \
+    && make install \
+    && cd .. \
+    && rm -rf jemalloc-5.3.0 5.3.0.tar.gz \
+    && ldconfig
+
+ENV LD_PRELOAD="/usr/local/lib/libjemalloc.so"
 
 #####
 # Add Tini

@@ -30,13 +30,16 @@ ORIGINAL_CHECKSUM=$(grep -A 4 "version: ${KAFKA_VERSION}" kafka-versions.yaml | 
 # replace kafka url to automq
 sed -i "s|${KAFKA_URL}|${AUTOMQ_URL}|" kafka-versions.yaml
 sed -i "s|${ORIGINAL_CHECKSUM}|${AUTOMQ_CHECKSUM}|" kafka-versions.yaml
-# set 3.9.0 as default
-sed -i '/- version: 3\.9\.0/,/^- version:/ { /default: false/c\  default: true
-}' kafka-versions.yaml
+# set target version as default
+sed -i "/- version: ${KAFKA_VERSION}/,/^- version:/ { /default: false/c\\  default: true
+}" kafka-versions.yaml
 sed -i '/- version: 4\.0\.0/,$ { s/default: true/default: false/; }' kafka-versions.yaml
 # exclude other versions to speed up building
+sed -i '/- version: 3\.9\.0/,/^- version:/ { s/supported: true/supported: false/; }' kafka-versions.yaml
 sed -i '/- version: 3\.9\.1/,/^- version:/ { s/supported: true/supported: false/; }' kafka-versions.yaml
 sed -i '/- version: 4\.0\.0/,$ { s/supported: true/supported: false/; }' kafka-versions.yaml
+# re-enable the target version
+sed -i "/- version: ${KAFKA_VERSION}/,/^- version:/ { s/supported: false/supported: true/; }" kafka-versions.yaml
 
 echo "Preparing Strimzi Image Environment..."
 

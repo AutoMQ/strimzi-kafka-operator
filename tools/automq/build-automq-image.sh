@@ -93,7 +93,9 @@ prometheus-metrics-exporter-common-1.3.6.jar
 prometheus-metrics-exporter-httpserver-1.3.1.jar
 prometheus-metrics-exporter-httpserver-1.3.6.jar
 prometheus-metrics-model-1.3.1.jar
-prometheus-metrics-model-1.3.6.jar"
+prometheus-metrics-model-1.3.6.jar
+spotbugs-annotations-4.7.2.jar
+spotbugs-annotations-4.8.6.jar"
 printf "%s\n" "$IGNORE_LIST" >> "${KAFKA_VERSION}.ignorelist"
 
 echo "Building and Pushing Docker Images..."

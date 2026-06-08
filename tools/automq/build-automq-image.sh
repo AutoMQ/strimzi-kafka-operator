@@ -56,12 +56,16 @@ guava-32.0.1-jre.jar
 guava-32.1.3-jre.jar
 jackson-annotations-2.16.2.jar
 jackson-annotations-2.17.1.jar
+jackson-annotations-2.20.jar
 jackson-core-2.16.2.jar
 jackson-core-2.17.1.jar
+jackson-core-2.20.0.jar
 jackson-databind-2.16.2.jar
 jackson-databind-2.17.1.jar
+jackson-databind-2.20.0.jar
 jackson-dataformat-yaml-2.16.2.jar
 jackson-dataformat-yaml-2.17.1.jar
+jackson-dataformat-yaml-2.20.0.jar
 opentelemetry-api-1.32.0.jar
 opentelemetry-api-1.40.0.jar
 opentelemetry-exporter-common-1.34.1.jar
@@ -95,7 +99,9 @@ prometheus-metrics-exporter-httpserver-1.3.6.jar
 prometheus-metrics-model-1.3.1.jar
 prometheus-metrics-model-1.3.6.jar
 spotbugs-annotations-4.7.2.jar
-spotbugs-annotations-4.8.6.jar"
+spotbugs-annotations-4.8.6.jar
+snakeyaml-2.2.jar
+snakeyaml-2.5.jar"
 printf "%s\n" "$IGNORE_LIST" >> "${KAFKA_VERSION}.ignorelist"
 
 echo "Building and Pushing Docker Images..."
